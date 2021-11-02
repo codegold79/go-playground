@@ -15,5 +15,5 @@ You can also try out the app by running it with `go run main.go` while in the `s
 
 ## Sources
 
-Episode data: https://github.com/quadrotriticale/star-trek-episodes-react/blob/master/components/data.json
+Episode data was modified based on data found at https://github.com/quadrotriticale/star-trek-episodes-react/blob/master/components/data.json
 Cobra user guide: https://github.com/spf13/cobra/blob/master/user_guide.md

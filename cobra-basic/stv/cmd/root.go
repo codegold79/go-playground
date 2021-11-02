@@ -6,9 +6,9 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "stv",
-	Short: "Provides episode name from number",
-	Long: `Star Trek Voyager Episode Name Retriever provides 
-the episode title based on an episode number.`,
+	Short: "Provides episode details from number or randomly",
+	Long: `Star Trek Voyager Episode Retriever returns brief episode details based
+on an episode number. It can also provide information for a random episode.`,
 }
 
 // Execute executes the root command.
@@ -17,4 +17,5 @@ func Execute() error {
 }
 
 func init() {
+	rootCmd.AddCommand(randomCmd)
 }
