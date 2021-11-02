@@ -12,13 +12,14 @@ var randomCmd = &cobra.Command{
 	Use:   "random",
 	Short: "Retrieve info from a random episode",
 	Long:  `Retrieve info from a random episode from Star Trek Voyager.`,
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		var ep episode.Details
 		ep, err := episode.Random()
 		if err != nil {
-			fmt.Println("error", err)
+			return err
 		}
 
 		fmt.Println(ep)
+		return nil
 	},
 }
