@@ -18,8 +18,11 @@ var randomCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-
 		fmt.Println(ep)
+
+		// TODO: For now, display flag values, but maybe later will be functional.
+		fmt.Printf("\nValue of SinglePartersOnly (default is false): %t", SinglePartersOnly)
+		fmt.Printf("\nValue of MultiPartersOnly (default is true): %t\n", MultiPartersOnly)
 		return nil
 	},
 }

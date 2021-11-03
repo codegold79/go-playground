@@ -8,38 +8,44 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var rootCmd = &cobra.Command{
-	Use:   "stv",
-	Short: "Provides episode details from number or randomly",
-	Long: `Star Trek Voyager Episode Retriever returns brief episode details based
+var (
+	// Used for flags.
+	SinglePartersOnly bool
+	MultiPartersOnly  bool
+
+	rootCmd = &cobra.Command{
+		Use:   "stv",
+		Short: "Provides episode details from number or randomly",
+		Long: `Star Trek Voyager Episode Retriever returns brief episode details based
 on an episode number. It can also provide information for a random episode.`,
-	Args: cobra.MaximumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		if len(args) == 0 {
-			fmt.Print(`Get episode details given an episode number between 1 and 172 inclusive.
+		Args: cobra.MaximumNArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			if len(args) == 0 {
+				fmt.Print(`Get episode details given an episode number between 1 and 172 inclusive.
 
 Usage:
    stv <episode number>
 
 Use --help for more information on how to use this command.
 `)
+				return nil
+			}
+
+			n, err := validEpisodeNumber(args[0])
+			if err != nil {
+				return fmt.Errorf("episode number: %w", err)
+			}
+
+			ep, err := episode.Info(n)
+			if err != nil {
+				return err
+			}
+
+			fmt.Println(ep)
 			return nil
-		}
-
-		n, err := validEpisodeNumber(args[0])
-		if err != nil {
-			return fmt.Errorf("episode number: %w", err)
-		}
-
-		ep, err := episode.Info(n)
-		if err != nil {
-			return err
-		}
-
-		fmt.Println(ep)
-		return nil
-	},
-}
+		},
+	}
+)
 
 // Execute executes the root command.
 func Execute() error {
@@ -47,6 +53,9 @@ func Execute() error {
 }
 
 func init() {
+	randomCmd.Flags().BoolVarP(&SinglePartersOnly, "singlePartersOnly", "s", false, "Return a random episode that did not have a multiple parts")
+	randomCmd.Flags().BoolVarP(&MultiPartersOnly, "multiPartersOnly", "m", true, "Return a random episode that is one of multiple parts")
+
 	rootCmd.AddCommand(randomCmd)
 }
 
