@@ -9,7 +9,7 @@ import (
 func main() {
 	var s *nulls.NullString
 
-	// s is still null, so fields cannot be updated.
+	// s is still nil, so fields cannot be updated.
 	s.Set("abc", "hidden secret")
 	fmt.Printf("s type: %T, val: %#[1]v\n\n", s)
 
