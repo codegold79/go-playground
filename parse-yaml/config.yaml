@@ -1,0 +1,10 @@
+debug: true
+updateFreq: 3
+faves:
+  - category: "animal"
+    rank: 3
+  - category: "color"
+    rank: 2
+tools:
+  leased: false
+  qty: 1
