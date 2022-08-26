@@ -8,3 +8,10 @@ faves:
 tools:
   leased: false
   qty: 1
+colors:
+  - visible: true
+    brightness: 10
+    name: "red"
+  - visible: false
+    brightness: 1
+    name: "far infrared"

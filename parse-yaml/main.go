@@ -14,6 +14,11 @@ type Config struct {
 	UpdateFreq int                      `yaml:"updateFreq"`
 	Faves      []map[string]interface{} `yaml:"faves"`
 	Tools      map[string]interface{}   `yaml:"tools"`
+	Colors     []struct {
+		Visible    bool   `yaml:"visible"`
+		Brightness int    `yaml:"brightness"`
+		Name       string `yaml:"name"`
+	} `yaml:"colors"`
 }
 
 func main() {
